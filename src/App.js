@@ -1,29 +1,54 @@
 
 import './App.css';
 import { useState } from 'react';
-import PersonList from './PersonList'; 
-import AddPerson from './AddPerson';
+import MovieList from './MovieList'; 
+import AddMovie from './AddMovie';
+import { v4 as uuidv4 } from 'uuid';
+import Filter from './Filter'
+
+
 function App() {
-
-const [persons,setPersons]=useState([
-  {fullName:'issam',age:21,image:"https://static.vecteezy.com/system/resources/previews/006/487/917/original/man-avatar-icon-free-vector.jpg",id:1},
-  {fullName:'raja',age:19,image:"https://www.shareicon.net/data/512x512/2016/07/26/802031_user_512x512.png",id:2}
-
+const[filter,setFilter]=useState("")
+const [Movie,setMovie]=useState([
+  
+  {MovieName:'El Insa',
+  Description:'ggggggggggggjkjlllllllläljklojoljoj',
+  rating: 4,
+  image:"https://assets.e-cinema.com/PICTURES/E01177-el-inca-nouvelle-affiche.jpg",
+  id:uuidv4(),},
+  {MovieName:'THE Northman',
+  Description:'llllllllllllljuoihigujjjjjjjjjjjjjjj',
+  rating: 3,
+  image:"https://egy4.best/uploads/m/a4160e4f91d624ae929a49bccb92b5b9.jpg",
+  id:uuidv4(),},
+  {MovieName:'THE System',
+  Description:'lkpkopljivggggggggffuzzvggggggggggggi',
+  rating: 2,
+  image:"https://egybestvip.com/uploads/m/9d68db10c146c7ed8751a4c9bc2e09cc.jpg",
+  id:uuidv4(),},
+  
 ])
-const handeleAdd=(newPerson)=>{
-  setPersons([...persons,newPerson])
+const handeleAdd=(newMovie)=>{
+  setMovie([...Movie,newMovie]);
 }
 const handleDlete=(per)=>{
-  setPersons( persons.filter(elm=>elm.id!==per.id))
+  setMovie( Movie.filter(elm=>elm.id!==per.id))
+}
+const handelFilter=(val)=>{
+  setFilter(val)
 }
   return (
     <div className="App">
     <header className="App-header">
-    <AddPerson handeleAdd={handeleAdd}/>
+     <Filter handelFilter={handelFilter}/>
+    <AddMovie handeleAdd={handeleAdd}/>
     <br></br>
-    <PersonList handleDlete={handleDlete} persons={persons}/>
+  
+    <MovieList handleDlete={handleDlete} Movie={Movie}/>
+    
     </header>
     </div>
+    
   );
 }
 
