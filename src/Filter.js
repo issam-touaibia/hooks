@@ -1,18 +1,34 @@
 import React from 'react'
 import { Form,Button } from 'react-bootstrap'
-const Filter = (props) => {
+import StarRatingComponent from 'react-star-rating-component';
+
+const Filter = ({handelKey , handleRating}) => {
   return (
     <div>
+      <div>
          <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-            onChange={(e)=> props.handelFilter(e.target.value)}
+            onChange={(e)=> handelKey(e.target.value)}
             />
             <Button variant="outline-success">Search</Button>
           </Form>
+          </div>
+          <div>
+         <Form className="d-flex">
+         <StarRatingComponent
+          name="star" /* name of the radio input, it is required */
+           /* number of selected icon (`0` - none, `1` - first) */
+          editing={true}
+          onStarClick = {(value) => handleRating(value)}
+          
+        />
+          </Form>
+          </div>
+          
     </div>
   )
 }

@@ -8,7 +8,9 @@ import Filter from './Filter'
 
 
 function App() {
-const[filter,setFilter]=useState("")
+const[key,setKey]=useState("")
+const [rating , setRating] = useState(1)
+
 const [Movie,setMovie]=useState([
   
   {MovieName:'El Insa',
@@ -31,22 +33,26 @@ const [Movie,setMovie]=useState([
 const handeleAdd=(newMovie)=>{
   setMovie([...Movie,newMovie]);
 }
-const handleDlete=(per)=>{
-  setMovie( Movie.filter(elm=>elm.id!==per.id))
+
+const handelKey=(text)=>{
+  setKey(text)
 }
-const handelFilter=(val)=>{
-  setFilter(val)
+
+const handleRating = (number) => {
+  setRating(number)
 }
   return (
     <div className="App">
     <header className="App-header">
-     <Filter handelFilter={handelFilter}/>
+     <Filter handelKey={handelKey} handleRating={handleRating}/>
     <AddMovie handeleAdd={handeleAdd}/>
     <br></br>
-  
-    <MovieList handleDlete={handleDlete} Movie={Movie}/>
+ 
+    <MovieList Movie={Movie.filter(el => el.MovieName.toLowerCase().includes(key.toLowerCase().trim())&& el.rating >= rating)}/>
     
     </header>
+
+    
     </div>
     
   );
